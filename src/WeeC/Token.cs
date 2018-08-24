@@ -7,47 +7,112 @@ using System.Collections.Generic;
 
 namespace WeeC
 {
-    internal abstract class Token
+    internal class Token
     {
-        public int LineNumber { get; internal set; }
-        public int CharPosition { get; internal set; }
-    }
+        public class None : Token { }
+        public class Comma : Token { }
+        public class Assign : Token { }
+        public class AddAssign : Token { }
+        public class SubAssign : Token { }
+        public class MulAssign : Token { }
+        public class DivAssign : Token { }
+        public class ModAssign : Token { }
+        public class ShiftLeftAssign : Token { }
+        public class ShiftRightAssign : Token { }
+        public class BitwiseOrAssign : Token { }
+        public class BitwiseXorAssign : Token { }
+        public class BitwiseAndAssign : Token { }
+        public class QuestionMark : Token { }
+        public class Colon : Token { }
+        public class Or : Token { }
+        public class And : Token { }
+        public class BitwiseOr : Token { }
+        public class BitwiseXor : Token { }
+        public class BitwiseAnd : Token { }
+        public class Ampersand : Token { }
+        public class Equal : Token { }
+        public class NotEqual : Token { }
+        public class LessThan : Token { }
+        public class LessThanOrEqualTo : Token { }
+        public class GreaterThan : Token { }
+        public class GreaterThanOrEqualTo : Token { }
+        public class ShiftLeft : Token { }
+        public class ShiftRight : Token { }
+        public class Plus : Token { }
+        public class Minus : Token { }
+        public class Asterisk : Token { }
+        public class Slash : Token { }
+        public class Modulus : Token { }
+        public class Increment : Token { }
+        public class Decrement : Token { }
+        public class Not : Token { }
+        public class BitwiseNot : Token { }
+        public class Dot : Token { }
+        public class Arrow : Token { }
 
-    internal class Keyword : Token
-    {
-        internal sealed class Auto : Keyword { }
-        internal sealed class Break : Keyword { }
-        internal sealed class Case : Keyword { }
-        internal sealed class Char : Keyword { }
-        internal sealed class Const : Keyword { }
-        internal sealed class Continue : Keyword { }
-        internal sealed class Default : Keyword { }
-        internal sealed class Do : Keyword { }
-        internal sealed class Double : Keyword { }
-        internal sealed class Else : Keyword { }
-        internal sealed class Enum : Keyword { }
-        internal sealed class Extern : Keyword { }
-        internal sealed class Float : Keyword { }
-        internal sealed class For : Keyword { }
-        internal sealed class Goto : Keyword { }
-        internal sealed class If : Keyword { }
-        internal sealed class Int : Keyword { }
-        internal sealed class Long : Keyword { }
-        internal sealed class Register : Keyword { }
-        internal sealed class Return : Keyword { }
-        internal sealed class Short : Keyword { }
-        internal sealed class Signed : Keyword { }
-        internal sealed class Sizeof : Keyword { }
-        internal sealed class Static : Keyword { }
-        internal sealed class Struct : Keyword { }
-        internal sealed class Switch : Keyword { }
-        internal sealed class Typedef : Keyword { }
-        internal sealed class Union : Keyword { }
-        internal sealed class Unsigned : Keyword { }
-        internal sealed class Void : Keyword { }
-        internal sealed class Volatile : Keyword { }
-        internal sealed class While : Keyword { }
-        internal readonly static Dictionary<string, Func<Keyword>> Table = new Dictionary<string, Func<Keyword>>
+        public abstract class ValueToken : Token
+        { 
+            public string Value { get; set; }
+        }
+
+        public class Identifier : ValueToken { }
+        public class IntegerConstant : ValueToken { }
+        public class FloatingPointConstant : ValueToken { }
+        public class CharacterConstant : ValueToken { }
+        public class StringLiteral : ValueToken { }
+
+        public class Semicolon : Token { }
+        public class Ellipsis : Token { }
+
+        public class LeftSquareBracket : Token { }
+        public class RightSquareBracket : Token { }
+        public class LeftCurlyBrace : Token { }
+        public class RightCurlyBrace : Token { }
+        public class LeftParen : Token { }
+        public class RightParen : Token { }
+
+        public class Auto : Token { }
+        public class Break : Token { }
+        public class Case : Token { }
+        public class Char : Token { }
+        public class Const : Token { }
+        public class Continue : Token { }
+        public class Default : Token { }
+        public class Do : Token { }
+        public class Double : Token { }
+        public class Else : Token { }
+        public class Enum : Token { }
+        public class Extern : Token { }
+        public class Float : Token { }
+        public class For : Token { }
+        public class Goto : Token { }
+        public class If : Token { }
+        public class Int : Token { }
+        public class Long : Token { }
+        public class Register : Token { }
+        public class Return : Token { }
+        public class Short : Token { }
+        public class Signed : Token { }
+        public class Sizeof : Token { }
+        public class Static : Token { }
+        public class Struct : Token { }
+        public class Switch : Token { }
+        public class Typedef : Token { }
+        public class Union : Token { }
+        public class Unsigned : Token { }
+        public class Void : Token { }
+        public class Volatile : Token { }
+        public class While : Token { }
+
+        public class EndOfLine : Token { }
+        public class EndOfFile : Token { }
+
+        public class InvalidToken : Token { }
+
+        public int LineNumber { get; set; }
+        public int CharPosition { get; set; }
+
+        public readonly static Dictionary<string, Func<Token>> KeywordTable = new Dictionary<string, Func<Token>>
         {
             {"auto", () => new Auto()},
             {"break", () => new Break()},
@@ -82,31 +147,5 @@ namespace WeeC
             {"volatile", () => new Volatile ()},
             {"while", () => new While ()}
         };
-    }
-
-    internal class Identifier : Token
-    {
-        public string Value { get; internal set; }
-    }
-
-    internal class Constant : Token
-    {
-        public string Value { get; internal set; }
-    }
-
-    internal class StringLiteral : Token
-    {
-    }
-
-    internal class Operator : Token
-    {
-    }
-
-    internal class Punctuator : Token
-    {
-    }
-
-    internal class EndOfLine : Token
-    {
     }
 }

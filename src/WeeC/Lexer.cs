@@ -77,7 +77,7 @@ namespace WeeC
                         c = code[position];
                     }
 
-                    var constant = Token<Constant>(tokenLineNumber, tokenCharPosition);
+                    var constant = Token<Constant.IntegerConstant>(tokenLineNumber, tokenCharPosition);
                     constant.Value = integer;
                     yield return constant;
                     continue;
@@ -97,7 +97,7 @@ namespace WeeC
                 var nextC = nextPosition < length ? code[nextPosition] : '\0';
                 switch (c)
                 {
-                    case '(': break;
+                    case '(': Token<Punctuator.LeftParen>(tokenLineNumber, tokenCharPosition); break;
                     case ')': break;
                     case '=': break;
                     case '+': break;
