@@ -50,16 +50,11 @@ namespace WeeC
         public class Dot : Token { }
         public class Arrow : Token { }
 
-        public abstract class ValueToken : Token
-        { 
-            public string Value { get; set; }
-        }
-
-        public class Identifier : ValueToken { }
-        public class IntegerConstant : ValueToken { }
-        public class FloatingPointConstant : ValueToken { }
-        public class CharacterConstant : ValueToken { }
-        public class StringLiteral : ValueToken { }
+        public class Identifier : Token { }
+        public class IntegerConstant : Token { }
+        public class FloatingPointConstant : Token { }
+        public class CharacterConstant : Token { }
+        public class StringLiteral : Token { }
 
         public class Semicolon : Token { }
         public class Ellipsis : Token { }
@@ -109,8 +104,10 @@ namespace WeeC
 
         public class InvalidToken : Token { }
 
+        public string TypeName => this.GetType().Name;
+        public string Value { get; set; }
         public int LineNumber { get; set; }
-        public int CharPosition { get; set; }
+        public int LinePosition { get; set; }
 
         public readonly static Dictionary<string, Func<Token>> KeywordTable = new Dictionary<string, Func<Token>>
         {
